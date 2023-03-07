@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Gerador de CPF</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f9f9f9;
+			margin: 50;
+			padding: 50;
+		}
+		.container {
+			max-width: 600px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fff;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+		}
+		h1 {
+			margin-top: 0;
+			font-size: 36px;
+			color: #333;
+		}
+		p {
+			font-size: 18px;
+			color: #666;
+		}
+		button {
+			display: block;
+			margin: 50px 0;
+			padding: 10px 20px;
+			font-size: 18px;
+			color: #fff;
+			background-color: #007bff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.2s ease;
+		}
+		button:hover {
+			background-color: #0062cc;
+		}
+		#cpf {
+			font-size: 24px;
+			color: #333;
+			text-align: center;
+			margin: 40px 0;
+		}
+	</style>
+</head>
+<body>
+	<h1>Gerador de CPF</h1>
+	<p>Clique no botão abaixo para gerar um CPF aleatório:</p>
+	<button onclick="generateCPF()">Gerar CPF</button>
+	<p id="cpf"></p>
+
+	<script>
+		function generateCPF() {
+			// Gerar os nove primeiros dígitos aleatórios
+			var cpf = '';
+			for (var i = 0; i < 9; i++) {
+				cpf += Math.floor(Math.random() * 10);
+			}
+
+			// Gerar o primeiro dígito verificador
+			var soma = 0;
+			for (var i = 0; i < 9; i++) {
+				soma += parseInt(cpf.charAt(i)) * (i + 1);
+			}
+			var digito1 = (soma % 11) % 10;
+			cpf += digito1;
+
+			// Gerar o segundo dígito verificador
+			soma = 0;
+			for (var i = 0; i < 10; i++) {
+				soma += parseInt(cpf.charAt(i)) * (i + 1);
+			}
+			var digito2 = (soma % 11) % 10;
+			cpf += digito2;
+
+			// Formatar o CPF
+			cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+
+			// Exibir o CPF na página
+			document.getElementById("cpf").innerHTML = cpf;
+		}
+	</script>
+</body>
+</html>
+
+
+<!-- Totalmente Codado por Victor Dos Santos Estudante de redes de computadores e estudante de python. -->
